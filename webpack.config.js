@@ -12,6 +12,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        include: path.resolve(__dirname, './src'),
+        loader: 'babel-loader',
+        options: {
+          presets: ['babel-preset-env'],
+          plugins: [require('babel-plugin-transform-object-rest-spread')],
+        }
+      },
+      {
         test: /\.(mp3|txt|png|jpg|gif|svg)$/,
         include: path.resolve(__dirname, './src'),
         loader: "file-loader",
