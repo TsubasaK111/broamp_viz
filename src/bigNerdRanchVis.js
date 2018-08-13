@@ -1,0 +1,63 @@
+
+// not used in this file and is referenced in index.html, but we need this to have webpack pack the audio file.
+import './audio/Odesza-Above_The_Middle.mp3';
+
+const bigNerdRanchVis = () => {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const audioElement = document.getElementById('audioElement');
+  const audioSrc = audioCtx.createMediaElementSource(audioElement);
+  const analyser = audioCtx.createAnalyser();
+
+  // Bind our analyser to the media element source.
+  audioSrc.connect(analyser);
+  audioSrc.connect(audioCtx.destination);
+
+  //const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+  const frequencyData = new Uint8Array(200);
+
+  const svgHeight = '300';
+  const svgWidth = '1200';
+  const barPadding = '1';
+
+  function createSvg(parent, height, width) {
+    return d3.select(parent).append('svg').attr('height', height).attr('width', width);
+  }
+
+  const svg = createSvg('#bigNerdRanchVis', svgHeight, svgWidth);
+
+  // Create our initial D3 chart.
+  svg.selectAll('rect')
+    .data(frequencyData)
+    .enter()
+    .append('rect')
+    .attr('x', function (d, i) {
+      return i * (svgWidth / frequencyData.length);
+    })
+    .attr('width', svgWidth / frequencyData.length - barPadding);
+
+  // Continuously loop and update chart with frequency data.
+  function renderChart() {
+    requestAnimationFrame(renderChart);
+
+    // Copy frequency data to frequencyData array.
+    analyser.getByteFrequencyData(frequencyData);
+
+    // Update d3 chart with new data.
+    svg.selectAll('rect')
+      .data(frequencyData)
+      .attr('y', function (d) {
+        return svgHeight - d;
+      })
+      .attr('height', function (d) {
+        return d;
+      })
+      .attr('fill', function (d) {
+        return 'rgb(0, 0, ' + d + ')';
+      });
+  }
+
+  // Run the loop
+  renderChart();
+};
+
+export default bigNerdRanchVis;
