@@ -7,7 +7,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
-    "start": "yarn build && http-server dist -a 127.0.0.1 -p 8888"
+    "start": "yarn build && http-server dist -a 127.0.0.1 -p 8888",
+    "hack": "webpack-dev-server --hot"
   },
   "dependencies": {
     "d3": "^5.5.0",
@@ -21,6 +22,7 @@
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.9.1"
   }
 }
