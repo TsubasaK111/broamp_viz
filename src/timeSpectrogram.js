@@ -1,17 +1,33 @@
 import * as d3 from "d3";
 
-const bigNerdRanchVis = (analyser) => {
+export const getAudioAnalyzer = () => {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const audioElement = document.getElementById('audioElement');
+  const audioSrc = audioContext.createMediaElementSource(audioElement);
+  const analyser = audioContext.createAnalyser();
+
+  // Bind our analyser to the media element source.
+  audioSrc.connect(audioContext.destination);
+  audioSrc.connect(analyser);
+  return analyser;
+}
+
+export const timeSpectrogram = (analyser) => {
+
+  analyser.smoothingTimeConstant = 0;
+  analyser.fftSize = 1024;
+
   // initialize D3 chart space.
   const svgHeight = '200';
   const svgWidth = '600';
   const barPadding = '0';
-  const svg = d3.select('#bigNerdRanchVis')
+  const svg = d3.select('#timeSpectrogram')
     .append('svg')
     .attr('height', svgHeight)
     .attr('width', svgWidth)
 
-  // const frequencyData = new Uint8Array(analyser.frequencyBinCount);
   const frequencyData = new Uint8Array(600);
+  // const frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
   // Create our initial D3 chart.
   svg.selectAll('rect')
@@ -40,4 +56,4 @@ const bigNerdRanchVis = (analyser) => {
   renderChart();
 };
 
-export default bigNerdRanchVis;
+// export default timeSpectrogram;
