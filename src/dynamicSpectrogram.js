@@ -1,6 +1,5 @@
 import chroma from "chroma-js";
 import * as d3 from "d3";
-// import greyScale from "./colorScales";
 
 class DynamicSpectrogram {
   constructor(audioSource, audioElement, options = {}) {
@@ -9,13 +8,20 @@ class DynamicSpectrogram {
     this.analyser = audioSource.analyser;
     this.height = options.height || '512';
     this.width = options.width || '500';
+    this.horizScrollRate = options.horizScrollRate || 1;
+    this.chromaScale = options.chromaScale || 
+      new chroma
+      .scale([[0,0,0,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]])
+      .domain([0, 45, 90, 150, 225])
+      .mode('rgb');
 
     // get the context from the canvas to draw on
     this.d3Canvas = d3.select('#spectrogramVis')
       .append('canvas')
       .attr("id", "spectrogramCanvas")
       .attr('width', this.width)
-      .attr('height', this.height);
+      .attr('height', this.height)
+      .style("background-color", this.chromaScale(0));
 
     this.canvasContext = this.d3Canvas.node().getContext("2d");
 
@@ -24,15 +30,6 @@ class DynamicSpectrogram {
     this.tempContext = this.tempCanvas.getContext("2d");
     this.tempCanvas.width = this.width;
     this.tempCanvas.height = this.height;
-
-    // this.scale = greyScale();
-    // console.log(this.scale)
-
-    // used for color distribution
-    this.chromaScale = new chroma
-      .scale([[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]])
-      .domain([0, 45, 90, 150, 225])
-      .mode('rgb');
 
     this.setupAudioProcessor();
 
@@ -87,11 +84,11 @@ class DynamicSpectrogram {
       // draw each pixel with the specific color
       this.canvasContext.fillStyle = this.chromaScale(value);
       // draw the line at the right side of the canvas
-      this.canvasContext.fillRect(this.width - 1, this.height - i, 1, 1);
+      this.canvasContext.fillRect(this.width - this.horizScrollRate, this.height - i, this.horizScrollRate, 1);
     });
 
     // set translate on the canvas
-    this.canvasContext.translate(-1, 0);
+    this.canvasContext.translate(-this.horizScrollRate, 0);
     // draw the copied image
     this.canvasContext.drawImage(this.tempCanvas, 0, 0, this.width, this.height, 0, 0, this.width, this.height);
     // reset the transformation matrix

@@ -3,29 +3,30 @@ import * as d3 from "d3";
 
 class VerticalFrequencyVis {
   constructor(analyser, options = {}) {
-    // initialize D3 chart space.
     this.analyser = analyser;
     this.height = options.height || '512';
     this.width = options.width || '200';
+    // prevent number of bars being more than height
     this.bars = options.bars ||
       this.height >= analyser.frequencyBinCount ?
       analyser.frequencyBinCount :
       100;
+    // used for color distribution
+    this.chromaScale = options.chromaScale ||
+      new chroma
+        .scale([[0, 0, 0, 1], [0, 255, 255, 1], [0, 255, 0, 1], [255, 255, 0, 1], [255, 0, 0, 1]])
+        .domain([0, 45, 90, 150, 225])
+        .mode('rgb');
+    // declare number of bars
+    this.frequencyData = new Uint8Array(this.bars);
 
+    // initialize D3 chart space.
     this.svg = d3.select('#verticalFrequencyVis')
       .append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
-      .style("background-color", "black");
+      .style("background-color", this.chromaScale(0));
 
-    // declare number of bars
-    this.frequencyData = new Uint8Array(this.bars);
-
-    // used for color distribution
-    this.chromaScale = new chroma
-      .scale([[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]])
-      .domain([0, 45, 90, 150, 225])
-      .mode('rgb');
 
     // create initial D3 chart.
     this.svg.selectAll('rect')
@@ -34,8 +35,8 @@ class VerticalFrequencyVis {
       .append('rect')
       .attr('y', (d, i) => this.height - (i * (this.height / this.frequencyData.length)))
       .attr('height', (this.height / this.frequencyData.length));
+
     //since renderChart is a recursive class method, make static reference to class;
-    console.log(this.width);
     this.renderChart = this.renderChart.bind(this);
     // Run loop
     this.renderChart();

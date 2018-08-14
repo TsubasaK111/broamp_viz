@@ -19,11 +19,12 @@ const greyScale = (steps = 275) => {
 };
 
 const rainbows = (steps = 275) => {
-  var baseColors = [[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]];
-  var positions = [0, 0.15, 0.30, 0.50, 0.75];
+  const baseColors = [[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]];
+  const positions = [0, 0.15, 0.30, 0.50, 0.75];
 
-  var scale = new chroma.scale(baseColors, positions)
-  .domain([0, steps]);
+  var scale = new chroma
+    .scale(baseColors, positions)
+    .domain([0, steps]);
 
   var colors = [];
 
@@ -31,7 +32,7 @@ const rainbows = (steps = 275) => {
     var color = scale(i);
     colors.push(color.hex());
   }
-
   return colors;
 }
+
 export default greyScale;
