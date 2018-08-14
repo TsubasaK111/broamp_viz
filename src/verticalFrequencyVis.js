@@ -6,7 +6,7 @@ class VerticalFrequencyVis {
     // initialize D3 chart space.
     this.analyser = analyser;
     this.height = options.height || '512';
-    this.width = options.width || '300';
+    this.width = options.width || '200';
     this.bars = options.bars ||
       this.height >= analyser.frequencyBinCount ?
       analyser.frequencyBinCount :
@@ -23,7 +23,7 @@ class VerticalFrequencyVis {
 
     // used for color distribution
     this.chromaScale = new chroma
-      .scale(['#000000', '#ff0000', '#ffff00', '#ffffff'])
+      .scale([[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]])
       .domain([0, 300])
       .mode('rgb');
 
@@ -51,11 +51,10 @@ class VerticalFrequencyVis {
     // Update d3 chart with new data.
     this.svg.selectAll('rect')
       .data(this.frequencyData)
+      // default is perfectly fine (x=0 aligns bars to left).
       // .attr('x', () => 0) 
       .attr('width', (d) => d)
-      .attr('fill', (d) => {
-        return this.chromaScale(d)
-      });
+      .attr('fill', (d) => this.chromaScale(d));
   }
 };
 

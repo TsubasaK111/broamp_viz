@@ -1,5 +1,6 @@
 import chroma from "chroma-js";
 import * as d3 from "d3";
+// import greyScale from "./colorScales";
 
 class DynamicSpectrogram {
   constructor(audioSource, audioElement, options = {}) {
@@ -24,9 +25,12 @@ class DynamicSpectrogram {
     this.tempCanvas.width = this.width;
     this.tempCanvas.height = this.height;
 
+    // this.scale = greyScale();
+    // console.log(this.scale)
+
     // used for color distribution
     this.chromaScale = new chroma
-      .scale(['#000000', '#ff0000', '#ffff00', '#ffffff'])
+      .scale([[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]])
       .domain([0, 300])
       .mode('rgb');
 
