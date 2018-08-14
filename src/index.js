@@ -1,5 +1,5 @@
 import { loadFile, AudioSource } from "./utils";
-import bigNerdRanchVis from "./bigNerdRanchVis";
+import BigNerdRanchVis from "./bigNerdRanchVis";
 import modSpectrogram from "./modSpectrogram";
 
 import './audio/Odesza-Above_The_Middle.mp3';
@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   audioElement.src = "./audio/Odesza-Above_The_Middle.mp3";
 
   const audioSource = new AudioSource();
-  bigNerdRanchVis(audioSource.analyser);
+  new BigNerdRanchVis(audioSource.analyser);
+  // bigNerdRanchVis(audioSource.analyser);
   modSpectrogram(audioSource, audioElement);
 });
 
