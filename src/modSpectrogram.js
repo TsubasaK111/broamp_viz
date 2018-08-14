@@ -6,7 +6,7 @@ class DynamicSpectrogram {
     this.audioElement = audioElement;
     this.audioContext = audioSource.context;
     this.analyser = audioSource.analyser;
-    this.height = options.height || '512';
+    this.height = options.height || '500';
     this.width = options.width || '500';
 
     // get the context from the canvas to draw on

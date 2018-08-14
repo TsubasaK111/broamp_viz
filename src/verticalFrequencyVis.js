@@ -1,23 +1,30 @@
+import chroma from "chroma-js";
 import * as d3 from "d3";
 
 class VerticalFrequencyVis {
   constructor(analyser, options = {}) {
     // initialize D3 chart space.
     this.analyser = analyser;
-    this.height = options.height || '512';
+    this.height = options.height || '500';
     this.width = options.width || '200';
     this.barPadding = options.barPadding || '1';
+    this.bars = options.bars || 100 || analyser.frequencyBinCount;
 
     this.svg = d3.select('#verticalFrequencyVis')
       .append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
 
-    // declare number of bars here
-    // this.frequencyData = new Uint8Array(analyser.frequencyBinCount);
-    this.frequencyData = new Uint8Array(50);
+    // declare number of bars
+    this.frequencyData = new Uint8Array(this.bars);
 
-    // Create our initial D3 chart.
+    // used for color distribution
+    this.chromaScale = new chroma
+      .scale(['#000000', '#ff0000', '#ffff00', '#ffffff'])
+      .domain([0, 300])
+      .mode('rgb');
+
+    // create initial D3 chart.
     this.svg.selectAll('rect')
       .data(this.frequencyData)
       .enter()
@@ -43,7 +50,7 @@ class VerticalFrequencyVis {
       .data(this.frequencyData)
       .attr('x', (d) => this.width - d)
       .attr('width', (d) => d)
-      .attr('fill', (d) => `rgb(${d * 0.5},0,0)`);
+      .attr('fill', (d) => this.chromaScale(d));
   }
 };
 
