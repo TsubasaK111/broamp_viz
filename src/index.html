@@ -11,16 +11,17 @@
 
 <body>
   <input id="fileInput" type="file" accept="audio/*">choose your own file</input>
-  <audio id="audioElement" src="./audio/Odesza-Above_The_Middle.mp3"></audio>
+  <audio id="audioElement"></audio>
   <div>
     <button onclick="document.getElementById('audioElement').play()">Play the Audio</button>
     <button onclick="document.getElementById('audioElement').pause()">Pause the Audio</button>
     <button onclick="document.getElementById('audioElement').volume+=0.1">Increase Volume</button>
     <button onclick="document.getElementById('audioElement').volume-=0.1">Decrease Volume</button>
   </div>
-  <div id="bigNerdRanchVis"></div>
-  
-  <canvas id="modCanvas" width="800" height="512" style="display: block; background-color: pink ;"></canvas>
+  <div>
+    <div id="bigNerdRanchVis"></div>
+    <canvas id="modCanvas" width="800" height="512" style="display: block; background-color: pink ;"></canvas>
+  </div>
   <canvas id="canvas" width="800" height="512" style="display: block; background-color: blue ;"></canvas>
   
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>

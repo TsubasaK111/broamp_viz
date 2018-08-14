@@ -4,14 +4,14 @@ const bigNerdRanchVis = (analyser) => {
   // initialize D3 chart space.
   const svgHeight = '200';
   const svgWidth = '600';
-  const barPadding = '0';
+  const barPadding = '1';
   const svg = d3.select('#bigNerdRanchVis')
     .append('svg')
     .attr('height', svgHeight)
     .attr('width', svgWidth)
 
   // const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-  const frequencyData = new Uint8Array(600);
+  const frequencyData = new Uint8Array(100);
 
   // Create our initial D3 chart.
   svg.selectAll('rect')
@@ -22,7 +22,7 @@ const bigNerdRanchVis = (analyser) => {
     .attr('width', (svgWidth / frequencyData.length) - barPadding);
 
   // Continuously loop and update chart with frequency data.
-  function renderChart() {
+  const renderChart = () => {
     requestAnimationFrame(renderChart);
 
     // Copy frequency data to frequencyData array.

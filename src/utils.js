@@ -14,9 +14,7 @@ export const loadFile = (event, options = {}) => {
 
   // TODO: jesus christ this is terrible.
   // return event.target.result directly plz.
-  const audioSource = document.getElementById("audioElement").src
-  console.log(audioSource);
-  // return audioSource;
+  const audioSource = document.getElementById("audioElement").src;
 }
 
 export class AudioSource{
@@ -28,7 +26,7 @@ export class AudioSource{
     this.smoothing = options.smoothing || 0.0;
     this.fft_size = options.fft_size || 1024;
     this.sampleSize = options.sampleSize || 512;
-    this.decRange = options.decRange || [-80.0, 80.0];
+    this.decRange = options.decRange || [-100, -30];
 
     // setup audio context and analyzer
     this.context = new (window.AudioContext || window.webkitAudioContext)();
