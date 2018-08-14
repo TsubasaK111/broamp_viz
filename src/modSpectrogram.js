@@ -1,12 +1,20 @@
+import chroma from "chroma-js";
+import * as d3 from "d3";
 
-const modSpectrogram = (audioMachine, audioElement) => {
-  const context = audioMachine.context;
-  const analyser = audioMachine.analyser;
+const modSpectrogram = (audioSource, audioElement) => {
+  const audioContext = audioSource.context;
+  const analyser = audioSource.analyser;
 
   let javascriptNode;
 
   // get the context from the canvas to draw on
-  const canvasContext = $("#modCanvas").get()[0].getContext("2d");
+  const d3Canvas = d3.select('#spectrogramVis')
+  .append('canvas')
+  .attr("id", "spectrogramCanvas")
+  .attr('width', 800)
+  .attr('height', 512);
+
+  const canvasContext = d3Canvas.node().getContext("2d");
 
   // create a temp canvas we use for copying
   const tempCanvas = document.createElement("canvas");
@@ -27,9 +35,9 @@ const modSpectrogram = (audioMachine, audioElement) => {
 
   function setupAudioNodes() {
     // setup a javascript node
-    javascriptNode = context.createScriptProcessor(2048, 1, 1);
+    javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
     // connect to destination, else it isn't called
-    javascriptNode.connect(context.destination);
+    javascriptNode.connect(audioContext.destination);
     // setup a analyzer
     analyser.connect(javascriptNode);
   }
@@ -45,7 +53,7 @@ const modSpectrogram = (audioMachine, audioElement) => {
     // When loaded decode the data
     request.onload = () => {
       // decode the data
-      context.decodeAudioData(request.response, (buffer) => {
+      audioContext.decodeAudioData(request.response, (buffer) => {
         // TODO: when the audio is decoded play the sound
       }, onError);
     }
@@ -69,7 +77,8 @@ const modSpectrogram = (audioMachine, audioElement) => {
 
   function drawSpectrogram(array) {
     // copy the current canvas onto the temp canvas
-    const canvas = document.getElementById("modCanvas");
+    const canvas = document.getElementById("spectrogramCanvas");
+    // const canvas = d3Canvas;
 
     tempCtx.drawImage(canvas, 0, 0, 800, 512);
 

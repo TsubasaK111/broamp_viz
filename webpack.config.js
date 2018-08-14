@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -21,6 +22,13 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader",
+        }),
+      },
+      {
         test: /\.(mp3|txt|png|jpg|gif|svg)$/,
         include: path.resolve(__dirname, './src'),
         loader: "file-loader",
@@ -34,6 +42,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
+    }),
+    new ExtractTextPlugin({
+      filename: "bundle.css"
     }),
     new UglifyJsPlugin({
       sourceMap: true,
