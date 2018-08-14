@@ -1,4 +1,4 @@
-const loadFile = (event) => {
+const loadFile = (event, options = {}) => {
   const audioFile = event.target.files[0];
 
   if (!audioFile) throw Error("no file chosen");
@@ -12,7 +12,11 @@ const loadFile = (event) => {
   // trigger event
   fr.readAsDataURL(audioFile);
 
-  console.log(document.getElementById("audioElement").src);
+  // TODO: jesus christ this is terrible.
+  // return event.target.result directly plz.
+  const audioSource = document.getElementById("audioElement").src
+  console.log(audioSource);
+  // return audioSource;
 }
 
 export default loadFile;

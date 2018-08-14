@@ -33,7 +33,7 @@ const bigNerdRanchVis = (analyser) => {
       .data(frequencyData)
       .attr('y', (d) => svgHeight - d)
       .attr('height', (d) => d)
-      .attr('fill', (d) => `rgb(${d*0.5},0,0)`);
+      .attr('fill', (d) => `rgb(${d * 0.5},0,0)`);
   }
 
   // Run loop
