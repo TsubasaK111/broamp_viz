@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const audioSource = new AudioSource();
   new VerticalFrequencyVis(audioSource.analyser);
   new DynamicSpectrogram(audioSource, audioElement);
-  gkheadCanvas();
+  // gkheadCanvas();
 });
 
 document
