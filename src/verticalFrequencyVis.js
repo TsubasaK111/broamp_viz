@@ -5,15 +5,18 @@ class VerticalFrequencyVis {
   constructor(analyser, options = {}) {
     // initialize D3 chart space.
     this.analyser = analyser;
-    this.height = options.height || '500';
-    this.width = options.width || '200';
-    this.barPadding = options.barPadding || '1';
-    this.bars = options.bars || 100 || analyser.frequencyBinCount;
+    this.height = options.height || '512';
+    this.width = options.width || '300';
+    this.bars = options.bars ||
+      this.height >= analyser.frequencyBinCount ?
+      analyser.frequencyBinCount :
+      100;
 
     this.svg = d3.select('#verticalFrequencyVis')
       .append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
+      .style("background-color", "black");
 
     // declare number of bars
     this.frequencyData = new Uint8Array(this.bars);
@@ -29,10 +32,10 @@ class VerticalFrequencyVis {
       .data(this.frequencyData)
       .enter()
       .append('rect')
-      .attr('y', (d, i) => i * (this.height / this.frequencyData.length))
-      .attr('height', (this.height / this.frequencyData.length) - this.barPadding);
-
+      .attr('y', (d, i) => this.height - (i * (this.height / this.frequencyData.length)))
+      .attr('height', (this.height / this.frequencyData.length));
     //since renderChart is a recursive class method, make static reference to class;
+    console.log(this.width);
     this.renderChart = this.renderChart.bind(this);
     // Run loop
     this.renderChart();
@@ -48,9 +51,11 @@ class VerticalFrequencyVis {
     // Update d3 chart with new data.
     this.svg.selectAll('rect')
       .data(this.frequencyData)
-      .attr('x', (d) => this.width - d)
+      // .attr('x', () => 0) 
       .attr('width', (d) => d)
-      .attr('fill', (d) => this.chromaScale(d));
+      .attr('fill', (d) => {
+        return this.chromaScale(d)
+      });
   }
 };
 

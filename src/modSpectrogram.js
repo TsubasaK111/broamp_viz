@@ -6,7 +6,7 @@ class DynamicSpectrogram {
     this.audioElement = audioElement;
     this.audioContext = audioSource.context;
     this.analyser = audioSource.analyser;
-    this.height = options.height || '500';
+    this.height = options.height || '512';
     this.width = options.width || '500';
 
     // get the context from the canvas to draw on
@@ -47,12 +47,12 @@ class DynamicSpectrogram {
     // use information from analyzer node to draw volume
     this.audioProcessor.onaudioprocess = () => {
       // get the average for the first channel
-      const array = new Uint8Array(this.analyser.frequencyBinCount);
-      this.analyser.getByteFrequencyData(array);
+      const frequencyData = new Uint8Array(this.analyser.frequencyBinCount);
+      this.analyser.getByteFrequencyData(frequencyData);
 
       // draw the spectrogram
       if (this.audioElement.playbackState == this.audioElement.PLAYING_STATE) {
-        this.drawSpectrogram(array);
+        this.drawSpectrogram(frequencyData);
       }
     }
   }
@@ -73,13 +73,13 @@ class DynamicSpectrogram {
     request.send();
   }
 
-  drawSpectrogram(array) {
+  drawSpectrogram(frequencyData) {
     // copy the current canvas onto the temp canvas
     const canvas = document.getElementById("spectrogramCanvas");
 
     this.tempContext.drawImage(canvas, 0, 0, this.width, this.height);
 
-    array.forEach((value, i) => {
+    frequencyData.forEach((value, i) => {
       // draw each pixel with the specific color
       this.canvasContext.fillStyle = this.chromaScale(value);
       // draw the line at the right side of the canvas
