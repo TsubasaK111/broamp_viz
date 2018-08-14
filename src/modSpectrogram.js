@@ -31,7 +31,7 @@ class DynamicSpectrogram {
     // used for color distribution
     this.chromaScale = new chroma
       .scale([[0,0,255,1], [0,255,255,1], [0,255,0,1], [255,255,0,1], [ 255,0,0,1]])
-      .domain([0, 300])
+      .domain([0, 45, 90, 150, 225])
       .mode('rgb');
 
     this.setupAudioProcessor();
