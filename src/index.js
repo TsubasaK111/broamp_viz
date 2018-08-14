@@ -1,7 +1,8 @@
 import { loadFile, AudioSource } from "./utils";
 import VerticalFrequencyVis from "./VerticalFrequencyVis";
 
-import modSpectrogram from "./modSpectrogram";
+import DynamicSpectrogram from "./modSpectrogram";
+// import modSpectrogram from "./modSpectrogram";
 import './audio/Odesza-Above_The_Middle.mp3';
 import './style.css';
 
@@ -12,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const audioSource = new AudioSource();
   // new BigNerdRanchVis(audioSource.analyser);
   new VerticalFrequencyVis(audioSource.analyser);
-
-  modSpectrogram(audioSource, audioElement);
+  new DynamicSpectrogram(audioSource, audioElement);
+  // modSpectrogram(audioSource, audioElement);
 });
 
 document
