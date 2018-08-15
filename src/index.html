@@ -9,14 +9,16 @@
 
 <body>
   <div class="navBox">
-    <img class="logo" src="./pong.svg">
-    <div class="logoText">BROAMP</div>
-    <input id="fileInput" type="file" accept="audio/*"></input>
-    <audio id="audioElement"></audio>
+    <div class="logoBox">
+      <img class="logo" src="./pong.svg">
+      <div class="logoText">BROAMP</div>
+    </div>
     <div class="buttonsBox">
-      <button id="togglePlayButton">▶️</button>
+      <audio id="audioElement"></audio>
+      <!-- <button id="togglePlayButton">▶️</button>
       <button onclick="document.getElementById('audioElement').volume+=0.02">🔊</button>
-      <button onclick="document.getElementById('audioElement').volume-=0.02">🔈</button>
+      <button onclick="document.getElementById('audioElement').volume-=0.02">🔈</button> -->
+      <input id="fileInput" type="file" accept="audio/*"></input>
     </div>
   </div>
   <div class="visBox">

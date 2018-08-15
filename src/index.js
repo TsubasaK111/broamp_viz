@@ -13,19 +13,19 @@ import './pong.svg';
 document.addEventListener("DOMContentLoaded", () => {
   const audioElement = document.getElementById('audioElement');
   audioElement.src = "./audio/Odesza-Above_The_Middle.mp3";
+  audioElement.controls = true;
   audioElement.volume = 0.7; //don't destroy your speakers bro
 
   const audioSource = new AudioSource();
   new VerticalFrequencyVis(audioSource.analyser);
   new DynamicSpectrogram(audioSource, audioElement);
   // gkheadCanvas();
-  // togglePlay();
 });
 
 document
   .getElementById('fileInput')
   .addEventListener('change', loadFile);
 
-  document
-  .getElementById('togglePlayButton')
-  .addEventListener('click', togglePlay);
+// document
+//   .getElementById('togglePlayButton')
+//   .addEventListener('click', togglePlay);
