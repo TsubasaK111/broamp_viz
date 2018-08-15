@@ -1,3 +1,25 @@
-.visContainer {
-  display: flex; /* or inline-flex */
+.navBox {
+  display: flex;
+  align-items: center;
+}
+
+.buttonsBox {
+  display: flex;
+}
+
+.logoText {
+  font-family: Verdana;
+  font-size: 48px;
+  font-weight: 900;
+  /* letter-spacing: -2px; */
+  letter-spacing: -0.0625em;
+  color: white;
+  background: linear-gradient(#FFF, #FFCA71, #FF8600);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2.5px black;
+}
+
+.visBox {
+  display: flex; 
 }

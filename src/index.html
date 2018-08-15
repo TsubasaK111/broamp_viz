@@ -3,21 +3,24 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Big Nerd Ranch D3 Blog Post</title>
+  <title>BroAmp</title>
   <style src="./bundle.js"></style>
 </head>
 
 <body>
-  <input id="fileInput" type="file" accept="audio/*">choose your own file</input>
-  <audio id="audioElement"></audio>
-  <div>
-    <button onclick="document.getElementById('audioElement').play()">Play the Audio</button>
-    <button onclick="document.getElementById('audioElement').pause()">Pause the Audio</button>
-    <button onclick="document.getElementById('audioElement').volume+=0.1">Increase Volume</button>
-    <button onclick="document.getElementById('audioElement').volume-=0.1">Decrease Volume</button>
+  <div class="navBox">
+    <img class="logo" src="./pong.svg">
+    <div class="logoText">BROAMP</div>
+    <input id="fileInput" type="file" accept="audio/*">choose your own file</input>
+    <audio id="audioElement"></audio>
+    <div class="buttonsBox">
+      <button id="togglePlayButton" onclick="document.getElementById('audioElement').play()">Play the Audio</button>
+      <button onclick="document.getElementById('audioElement').pause()">Pause the Audio</button>
+      <button onclick="document.getElementById('audioElement').volume+=0.1">Increase Volume</button>
+      <button onclick="document.getElementById('audioElement').volume-=0.1">Decrease Volume</button>
+    </div>
   </div>
-  <div class="visContainer">
+  <div class="visBox">
     <div id="spectrogramVis"></div>
     <div id="verticalFrequencyVis"></div>
   </div>

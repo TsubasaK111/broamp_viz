@@ -27,7 +27,6 @@ class VerticalFrequencyVis {
       .attr('height', this.height)
       .style("background-color", this.chromaScale(0));
 
-
     // create initial D3 chart.
     this.svg.selectAll('rect')
       .data(this.frequencyData)
