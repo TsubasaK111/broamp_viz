@@ -8,7 +8,8 @@
   "scripts": {
     "build": "webpack",
     "start": "yarn build && http-server dist -a 127.0.0.1 -p 8888",
-    "hack": "webpack-dev-server --hot --open"
+    "hack": "webpack-dev-server --hot --open",
+    "heroku-postbuild": "build"
   },
   "dependencies": {
     "chroma-js": "^1.3.7",
