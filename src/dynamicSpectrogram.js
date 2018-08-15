@@ -7,7 +7,7 @@ class DynamicSpectrogram {
     this.audioContext = audioSource.context;
     this.analyser = audioSource.analyser;
     this.height = options.height || '512';
-    this.width = options.width || '500';
+    this.width = options.width || '600';
     this.horizScrollRate = options.horizScrollRate || 1;
     this.chromaScale = options.chromaScale || 
       new chroma

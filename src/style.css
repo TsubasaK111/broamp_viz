@@ -1,20 +1,40 @@
-.navBox {
+body {
+  background-color: lightgray;
+  font-size: 14px;
+  font-family: Verdana;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.bodyBox {
   display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.navBox {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logoBox {
   display: flex;
   align-items: center;
-  margin-right:  20px;
 }
 
-.buttonsBox {
-  display: flex;
-  align-items: center;
+.inputLabel {
+  display: inline-block;
+  background-color: #eee;
+  padding: 12px 12px;
+  border-radius: 24px;
+  cursor: pointer;
 }
 
 .logoText {
-  font-family: Verdana;
   font-size: 48px;
   font-weight: 900;
   /* letter-spacing: -2px; */
@@ -28,4 +48,9 @@
 
 .visBox {
   display: flex; 
+}
+
+.buttonsBox {
+  display: flex;
+  align-items: center;
 }

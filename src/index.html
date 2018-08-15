@@ -8,24 +8,30 @@
 </head>
 
 <body>
-  <div class="navBox">
-    <div class="logoBox">
-      <img class="logo" src="./pong.svg">
-      <div class="logoText">BROAMP</div>
+  <div class="bodyBox">
+    <div class="navBox">
+      <div class="logoBox">
+        <img class="logo" src="./pong.svg">
+        <div class="logoText">BROAMP</div>
+      </div>
+      <div class="inputBox">
+        <label class="inputLabel">
+          <i class="fa fa-cloud-upload"></i> select file
+          <input id="fileInput" type="file" accept="audio/*" />
+        </label>
+      </div>
     </div>
-    <div class="buttonsBox">
+    <div class="visBox">
+      <div id="spectrogramVis"></div>
+      <div id="verticalFrequencyVis"></div>
+    </div>
+    <div class=buttonsBox>
       <audio id="audioElement"></audio>
       <!-- <button id="togglePlayButton">▶️</button>
       <button onclick="document.getElementById('audioElement').volume+=0.02">🔊</button>
       <button onclick="document.getElementById('audioElement').volume-=0.02">🔈</button> -->
-      <input id="fileInput" type="file" accept="audio/*"></input>
     </div>
   </div>
-  <div class="visBox">
-    <div id="spectrogramVis"></div>
-    <div id="verticalFrequencyVis"></div>
-  </div>
-  <canvas id="gkheadCanvas"></canvas>
 </body>
 
 </html>
