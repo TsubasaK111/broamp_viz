@@ -5,12 +5,12 @@ class VerticalFrequencyVis {
   constructor(analyser, options = {}) {
     this.analyser = analyser;
     this.height = options.height || '512';
-    this.width = options.width || '200';
+    this.width = options.width || '300';
     // prevent number of bars being more than height
     this.bars = options.bars ||
       this.height >= analyser.frequencyBinCount ?
       analyser.frequencyBinCount :
-      100;
+      300;
     // used for color distribution
     this.chromaScale = options.chromaScale ||
       new chroma

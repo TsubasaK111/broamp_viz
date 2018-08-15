@@ -6,7 +6,7 @@ class AudioSource{
     this.options = options;
     this.smoothing = options.smoothing || 0.0;
     this.fft_size = options.fft_size || 1024;
-    this.sampleSize = options.sampleSize || 512;
+    // this.sampleSize = options.sampleSize || 512;
     this.decRange = options.decRange || [-100, -30];
 
     // setup audio context and analyzer
