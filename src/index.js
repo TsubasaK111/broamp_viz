@@ -8,7 +8,7 @@ import DynamicSpectrogram from "./dynamicSpectrogram";
 
 import './audio/Odesza-Above_The_Middle.mp3';
 import './style.css';
-import './pong.svg';
+import './images/pong.svg';
 
 document.addEventListener("DOMContentLoaded", () => {
   const audioElement = document.getElementById('audioElement');

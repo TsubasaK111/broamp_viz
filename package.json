@@ -9,7 +9,7 @@
     "build": "webpack",
     "start": "http-server dist",
     "local:start": "http-server dist -a 127.0.0.1 -p 8888",
-    "local:hack": "webpack-dev-server --hot --open",
+    "hack": "webpack-dev-server --hot --open",
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {

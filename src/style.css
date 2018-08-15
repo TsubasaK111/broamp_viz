@@ -15,7 +15,11 @@ input[type="file"] {
 }
 
 .navBox {
-  width: 800px;
+  background-color: lightgray;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 900px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,6 +55,8 @@ input[type="file"] {
 }
 
 .buttonsBox {
+  /* position: fixed;
+  bottom: 0; */
   display: flex;
   align-items: center;
 }
