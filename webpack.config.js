@@ -1,9 +1,9 @@
 'use strict'
 
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -17,16 +17,12 @@ module.exports = {
         include: path.resolve(__dirname, './src'),
         loader: 'babel-loader',
         options: {
-          presets: ['babel-preset-env'],
-          plugins: [require('babel-plugin-transform-object-rest-spread')],
+          presets: ['@babel/preset-env'],
         }
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader",
-        }),
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(mp3|txt|png|jpg|gif|svg)$/,
@@ -39,19 +35,16 @@ module.exports = {
       },
     ]
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: "bundle.css"
-    }),
-    new UglifyJsPlugin({
-      sourceMap: true,
-      uglifyOptions: {
-        mangle: false,
-        compress: false
-      }
     }),
   ],
   output: {

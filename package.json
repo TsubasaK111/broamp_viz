@@ -9,26 +9,27 @@
     "build": "webpack",
     "start": "http-server dist",
     "local:start": "http-server dist -a 127.0.0.1 -p 8888",
-    "hack": "webpack-dev-server --hot --open",
+    "hack": "webpack-cli serve --hot --watch",
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
-    "chroma-js": "^1.3.7",
-    "d3": "^5.5.0",
-    "http-server": "^0.11.1"
+    "chroma-js": "^2.1.0",
+    "d3": "^6.2.0",
+    "http-server": "^0.12.3",
+    "webpack-dev-server": "^3.11.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.2.0",
-    "style-loader": "^0.22.1",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.9.1"
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^1.3.0",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.0.3",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
   }
 }
